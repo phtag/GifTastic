@@ -1,6 +1,7 @@
 // Example queryURL for Giphy API
-    var queryURL = "https://api.giphy.com/v1/gifs/trending?api_key=dc6zaTOxFJmzC";
-    var GIFbuttons = ["Frogs", "Lions", "Tigers", "Walruses"];
+// var queryURL = "https://api.giphy.com/v1/gifs/trending?api_key=dc6zaTOxFJmzC";
+var queryURL = "https://api.giphy.com/v1/gifs/amimals?api_key=dc6zaTOxFJmzC";
+var GIFtopicButtons = ["Frogs", "Lions", "Tigers", "Walruses"];
 
     renderButtons();
     $.ajax({
@@ -18,21 +19,23 @@
         myContainerDiv.empty();
         $('body').append(myContainerDiv);
 
+        // Create divs for adding buttons to and a form for adding new buttons dynamically
         var myButtonsDiv = $('<div id="#my-buttons-view"></div>');
         var myFormDiv = $('<div id="#my-form-view"></div>');
-         myButtonsDiv.empty();
+        // clear divs
+        myButtonsDiv.empty();
         myFormDiv.empty();
-        // Loops through the array of movies
-        for (var i = 0; i < GIFbuttons.length; i++) {
-          // Then dynamicaly generates buttons for each movie in the array
+        // Loops through the array of GIF buttons
+        for (var i = 0; i < GIFtopicButtons.length; i++) {
+          // Then dynamicaly generates buttons for each amimal in the array
           // This code $("<button>") is all jQuery needs to create the beginning and end tag. (<button></button>)
           var a = $("<button id='my-buttons'>");
-          // Adds a class of animal to our button
-          a.addClass("animal");
+          // Adds a class of GIF tpoic to our button
+          a.addClass("topic");
           // Added a data-attribute
-          a.attr("data-name", GIFbuttons[i]);
+          a.attr("data-name", GIFtopicButtons[i]);
           // Provided the initial button text
-          a.text(GIFbuttons[i]);
+          a.text(GIFtopicButtons[i]);
           // Added the button to the buttons-view div
           myButtonsDiv.append(a);
         }
@@ -44,6 +47,35 @@
         myContainerDiv.append(myButtonsDiv);
         myContainerDiv.append(myFormDiv);
       }
+    
+      function displayTopicGIFs() {
+        var topic = $(this).attr("data-name");
+        // var queryURL = "https://www.omdbapi.com/?t=" + movie + "&y=&plot=short&apikey=trilogy";
+        // var queryURL = "https://api.giphy.com/v1/gifs/trending?api_key=dc6zaTOxFJmzC&q=animals";
+        // var queryURL = "http://api.giphy.com/v1/gifs/search?q=ryan+gosling&api_key=kL6Yw5p9brn0ZmIG2h61enqo2B3LCS8o&limit=5";
+        var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + topic + "&api_key=kL6Yw5p9brn0ZmIG2h61enqo2B3LCS8o&limit=5";
+        // Creates AJAX call for the specific movie button being clicked
+        // var queryURL = "https://api.giphy.com/v1/gifs/trending?api_key=dc6zaTOxFJmzC";
+
+        $.ajax({
+          url: queryURL,
+          method: "GET"
+        }).then(function(response) {
+          alert("Topic=" + topic + " image=" + response.data[0].images.downsized.url);
+          console.log(response);
+          var myContainerDiv = $('.container');
+          var GIFqueryResultsDiv = $('<div>');
+            myContainerDiv.append(GIFqueryResultsDiv);
+            GIFqueryResultsDiv.text("Topic="+topic);
+          
+            var imageDiv = $('<img src="' +  response.data[0].images.downsized.url + '">');
+            GIFqueryResultsDiv.append(imageDiv);
+
+          // Appends the image
+          // Puts the entire Movie above the previous movies.
+        });
+      }
+      $(document).on("click", ".topic", displayTopicGIFs);
 
 
 
