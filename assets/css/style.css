@@ -78,6 +78,10 @@ body {
     color: black;
     border: 0px solid white; 
 }
+#my-GIF-images {
+    width: 200px;
+    margin: 10px;
+}
 #my-answer-GIF {
     width: 300px;
 }

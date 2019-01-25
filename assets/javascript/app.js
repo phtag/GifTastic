@@ -2,6 +2,17 @@
 // var queryURL = "https://api.giphy.com/v1/gifs/trending?api_key=dc6zaTOxFJmzC";
 var queryURL = "https://api.giphy.com/v1/gifs/amimals?api_key=dc6zaTOxFJmzC";
 var GIFtopicButtons = ["Frogs", "Lions", "Tigers", "Walruses"];
+var myContainerDiv = $('<div class="container">');
+  myContainerDiv.empty();
+  $('body').append(myContainerDiv);
+
+  // Create divs for adding buttons to and a form for adding new buttons dynamically
+  var myButtonsDiv = $('<div id="#my-buttons-view"></div>');
+  var myFormDiv = $('<div id="#my-form-view"></div>');
+  // clear divs
+  myButtonsDiv.empty();
+  myFormDiv.empty();
+  // Loops through the array of GIF buttons
 
     renderButtons();
     $.ajax({
@@ -65,11 +76,13 @@ var GIFtopicButtons = ["Frogs", "Lions", "Tigers", "Walruses"];
           console.log(response);
           var myContainerDiv = $('.container');
           var GIFqueryResultsDiv = $('<div>');
-            myContainerDiv.append(GIFqueryResultsDiv);
-            GIFqueryResultsDiv.text("Topic="+topic);
-          
-            var imageDiv = $('<img src="' +  response.data[0].images.downsized.url + '">');
+          GIFqueryResultsDiv.empty();
+          myContainerDiv.append(GIFqueryResultsDiv);
+          // GIFqueryResultsDiv.text("Topic="+topic);
+          for (i=0;i<response.data.length;i++) {
+            var imageDiv = $('<img id="my-GIF-images" src="' +  response.data[i].images.downsized.url + '">');
             GIFqueryResultsDiv.append(imageDiv);
+          }
 
           // Appends the image
           // Puts the entire Movie above the previous movies.
