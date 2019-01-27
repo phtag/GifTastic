@@ -6,7 +6,7 @@
   var GIFqueryResultsDiv = $('<div id="my-GIFs-view">');
   var myButtonsDiv = $('<div id="#my-buttons-view"></div>');
   var myFormDiv = $('<div id="#my-form-view"></div>');
-  var numGIFsToDisplay = 10;
+  var numGIFsToDisplay = 6;
 
     
   myContainerDiv.empty();
