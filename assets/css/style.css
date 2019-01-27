@@ -32,6 +32,17 @@ body {
     border: 2px solid darkgreen;
     background-color: cornflowerblue;
  }
+ figure {
+     font-size: 18px;
+     color: black;
+     font-weight: bold;
+     /* flex: 33%; */
+     float: left;
+     width: 33%;
+ }
+ figcaption {
+     margin-top: -10px;
+ }
 .my-header {
     font-family: 'Archivo', sans-serif;
     font-size: 32pt;
@@ -62,6 +73,7 @@ body {
 }
 #my-GIFs-view {
     width: 95%;
+    height: 600px;
     margin: auto;
     margin-top: 10px;
     margin-bottom: 10px;
@@ -71,40 +83,16 @@ body {
     background-color: lightgoldenrodyellow; 
     color: black;
     border: 2px solid black; 
+    overflow: auto;
+    /* display: flex; */
+    /* display: inline-block; */
 }
 .my-GIF-images {
     /* width: 200px; */
-    width: 25%;
-    margin: 10px;
+    width: 90%;
+    height: 150px;
+    margin: 5%; 
     border: 3px solid darkgoldenrod;
     object-fit: cover;
 }
-#my-answer-GIF {
-    width: 300px;
-}
-#time-remaining {
-    text-align: center;
-    width: 100%;
-    color: red;
-    font-size: 20px;
-}
-#game-completed {
-    font-size: 28px;
-    font-weight: bold;
-    color: red;
-    text-align: center;
-}
-#quiz-question {
-    font-size: 20px;
-    color: black;
-    text-align: center;
-    font-weight: normal;
-}
-#question-choices {
-    font-size: 24px;
-    text-align: center;
-}
-#my-choices-buttons-container {
-    font-size: 24px;
-    text-align: center; 
-}
+

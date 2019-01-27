@@ -7,7 +7,7 @@
   var GIFqueryResultsDiv = $('<div id="my-GIFs-view">');
   var myButtonsDiv = $('<div id="#my-buttons-view"></div>');
   var myFormDiv = $('<div id="#my-form-view"></div>');
-  var numGIFsToDisplay = 6;
+  var numGIFsToDisplay = 10;
 
   myContainerDiv.empty();
   $('body').append(myContainerDiv);
@@ -36,8 +36,6 @@
     myAddButtonsForm.append('<input type="text" id="GIF-input"><br>');
     myAddButtonsForm.append('<input id="add-GIF" type="submit" value="Add new animal">');
     myFormDiv.append(myAddButtonsForm);
-    // myContainerDiv.append(myButtonsDiv);
-    // myContainerDiv.append(myFormDiv);
     myContainerDiv.prepend(myFormDiv);
     myContainerDiv.prepend(myButtonsDiv);
   }
@@ -70,15 +68,19 @@
       url: queryURL,
       method: "GET"
     }).then(function(response) {
-      console.log(response);
       GIFqueryResultsDiv.empty();
       myContainerDiv.append(GIFqueryResultsDiv);
       // Load GIFs into the image element on the web page
       for (i=0;i<response.data.length;i++) {
+        var imageFigure = $('<figure></figure>');
         var imageDiv = $('<img class="my-GIF-images" src="' + response.data[i].images.downsized_still.url + 
           '" data-still="' + response.data[i].images.downsized_still.url + 
           '" data-animate="' + response.data[i].images.downsized.url + '" data-state="still">');
-        GIFqueryResultsDiv.append(imageDiv);
+        var figCaption = $('<figcaption>Rating=' + response.data[i].rating + '</figcaption>');
+        imageFigure.append(imageDiv);
+        imageFigure.append(figCaption);
+        GIFqueryResultsDiv.append(imageFigure);
+        console.log(response);
       }
     });
   }
