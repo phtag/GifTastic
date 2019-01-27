@@ -8,7 +8,6 @@
   var myFormDiv = $('<div id="#my-form-view"></div>');
   var numGIFsToDisplay = 6;
 
-    
   myContainerDiv.empty();
   $('body').append(myContainerDiv);
 
@@ -71,7 +70,7 @@
 
   function displayTopicGIFs() {
     var topic = $(this).attr("data-name");
-    var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + topic + "&api_key=kL6Yw5p9brn0ZmIG2h61enqo2B3LCS8o&limit="+numGIFsToDisplay;
+    var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + topic + "&api_key=kL6Yw5p9brn0ZmIG2h61enqo2B3LCS8o&limit="+numGIFsToDisplay;
 
     $.ajax({
       url: queryURL,
