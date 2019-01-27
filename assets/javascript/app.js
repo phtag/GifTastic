@@ -1,6 +1,7 @@
-// Example queryURL for Giphy API
-// var queryURL = "https://api.giphy.com/v1/gifs/trending?api_key=dc6zaTOxFJmzC";
-  // var queryURL = "https://api.giphy.com/v1/gifs/amimals?api_key=dc6zaTOxFJmzC";
+//  GIFy homework assignment
+//
+//  27 January 2019
+//_______________________________________________________________
   var GIFtopicButtons = ["Frogs", "Lions", "Tigers", "Walruses"];
   var myContainerDiv = $('<div class="container">');
   var GIFqueryResultsDiv = $('<div id="my-GIFs-view">');
@@ -19,13 +20,6 @@
   myFormDiv.empty();
   // Loops through the array of GIF buttons
   renderButtons();
-  $.ajax({
-    url: queryURL,
-    method: "GET"
-  }).then(function(response) {
-    console.log(response);
-  });
-  // Function for displaying movie data
   function renderButtons() {
     myButtonsDiv.empty();
     myFormDiv.empty();
