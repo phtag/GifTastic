@@ -3,7 +3,11 @@
   var queryURL = "https://api.giphy.com/v1/gifs/amimals?api_key=dc6zaTOxFJmzC";
   var GIFtopicButtons = ["Frogs", "Lions", "Tigers", "Walruses"];
   var myContainerDiv = $('<div class="container">');
-  var GIFqueryResultsDiv = $('<div>');
+  var GIFqueryResultsDiv = $('<div id="my-GIFs-view">');
+  var myButtonsDiv = $('<div id="#my-buttons-view"></div>');
+  var myFormDiv = $('<div id="#my-form-view"></div>');
+  var numGIFsToDisplay = 10;
+
     
   myContainerDiv.empty();
   $('body').append(myContainerDiv);
@@ -15,7 +19,6 @@
   myButtonsDiv.empty();
   myFormDiv.empty();
   // Loops through the array of GIF buttons
-
   renderButtons();
   $.ajax({
     url: queryURL,
@@ -25,11 +28,6 @@
   });
   // Function for displaying movie data
   function renderButtons() {
-    // $('body').append(myContainerDiv);
-    // Create divs for adding buttons to and a form for adding new buttons dynamically
-    var myButtonsDiv = $('<div id="#my-buttons-view"></div>');
-    var myFormDiv = $('<div id="#my-form-view"></div>');
-    // clear divs
     myButtonsDiv.empty();
     myFormDiv.empty();
     // Loops through the array of GIF buttons
@@ -45,9 +43,18 @@
     myAddButtonsForm.append('<input type="text" id="GIF-input"><br>');
     myAddButtonsForm.append('<input id="add-GIF" type="submit" value="Add new animal">');
     myFormDiv.append(myAddButtonsForm);
-    myContainerDiv.append(myButtonsDiv);
-    myContainerDiv.append(myFormDiv);
+    // myContainerDiv.append(myButtonsDiv);
+    // myContainerDiv.append(myFormDiv);
+    myContainerDiv.prepend(myFormDiv);
+    myContainerDiv.prepend(myButtonsDiv);
   }
+  $(document).on("click", "#add-GIF", function() {
+    if ($(this).attr('type')==="submit") {
+      GIFtopicButtons.push($('#GIF-input').val());
+      renderButtons();
+      event.preventDefault();
+    }
+  });
     
   $(document).on("click", ".my-GIF-images", function() {
     var state = $(this).attr('data-state');
@@ -64,27 +71,25 @@
 
   function displayTopicGIFs() {
     var topic = $(this).attr("data-name");
-    var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + topic + "&api_key=kL6Yw5p9brn0ZmIG2h61enqo2B3LCS8o&limit=5";
+    var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + topic + "&api_key=kL6Yw5p9brn0ZmIG2h61enqo2B3LCS8o&limit="+numGIFsToDisplay;
 
     $.ajax({
       url: queryURL,
       method: "GET"
     }).then(function(response) {
       console.log(response);
-      // var GIFqueryResultsDiv = $('<div>');
       GIFqueryResultsDiv.empty();
       myContainerDiv.append(GIFqueryResultsDiv);
+      // Load GIFs into the image element on the web page
       for (i=0;i<response.data.length;i++) {
-        var imageDiv = $('<img class="my-GIF-images" src="' + response.data[i].images.downsized.url + 
+        var imageDiv = $('<img class="my-GIF-images" src="' + response.data[i].images.downsized_still.url + 
           '" data-still="' + response.data[i].images.downsized_still.url + 
           '" data-animate="' + response.data[i].images.downsized.url + '" data-state="still">');
-
         GIFqueryResultsDiv.append(imageDiv);
       }
-
     });
   }
-    $(document).on("click", ".topic", displayTopicGIFs);
+  $(document).on("click", ".topic", displayTopicGIFs);
 
 
 
