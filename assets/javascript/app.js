@@ -1,6 +1,6 @@
 // Example queryURL for Giphy API
 // var queryURL = "https://api.giphy.com/v1/gifs/trending?api_key=dc6zaTOxFJmzC";
-  var queryURL = "https://api.giphy.com/v1/gifs/amimals?api_key=dc6zaTOxFJmzC";
+  // var queryURL = "https://api.giphy.com/v1/gifs/amimals?api_key=dc6zaTOxFJmzC";
   var GIFtopicButtons = ["Frogs", "Lions", "Tigers", "Walruses"];
   var myContainerDiv = $('<div class="container">');
   var GIFqueryResultsDiv = $('<div id="my-GIFs-view">');
