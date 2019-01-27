@@ -42,6 +42,8 @@ body {
  }
  figcaption {
      margin-top: -10px;
+     font-size: 12px;
+     font-weight: bold;
  }
 .my-header {
     font-family: 'Archivo', sans-serif;
@@ -94,5 +96,9 @@ body {
     margin: 5%; 
     border: 3px solid darkgoldenrod;
     object-fit: cover;
+}
+.my-GIF-download-button {
+    font-size: 10px;
+    text-align: center;
 }
 

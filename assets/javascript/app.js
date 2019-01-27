@@ -59,7 +59,11 @@
         $(this).attr('data-state', "still");
     }
   });
-
+  function downloadGIF() {
+    var url = $(this).attr('src');
+    // window.location.assign($(this).attr('src'));
+    window.open(url, '_self');  
+  }
   function displayTopicGIFs() {
     var topic = $(this).attr("data-name");
     var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + topic + "&api_key=kL6Yw5p9brn0ZmIG2h61enqo2B3LCS8o&limit="+numGIFsToDisplay;
@@ -75,16 +79,22 @@
         var imageFigure = $('<figure></figure>');
         var imageDiv = $('<img class="my-GIF-images" src="' + response.data[i].images.downsized_still.url + 
           '" data-still="' + response.data[i].images.downsized_still.url + 
-          '" data-animate="' + response.data[i].images.downsized.url + '" data-state="still">');
-        var figCaption = $('<figcaption>Rating=' + response.data[i].rating + '</figcaption>');
+          '" data-animate="' + response.data[i].images.downsized.url + '" data-state="still" download>');
+        var figCaption = $('<figcaption>Title: ' + response.data[i].title + ' (Rating=' + response.data[i].rating + ')</figcaption>');
+        // var downloadButton = $('<button class="my-GIF-download-button" src=' + response.data[i].images.downsized_still.url + '>');
+        var downloadButton = $('<button class="my-GIF-download-button" src="' + response.data[i].images.downsized_still.url + '">');
+        downloadButton.text('download');
         imageFigure.append(imageDiv);
         imageFigure.append(figCaption);
+        imageFigure.append(downloadButton);
         GIFqueryResultsDiv.append(imageFigure);
         console.log(response);
       }
     });
   }
   $(document).on("click", ".topic", displayTopicGIFs);
+
+  $(document).on("click", ".my-GIF-download-button", downloadGIF)
 
 
 
